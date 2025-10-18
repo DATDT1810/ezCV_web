@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Tạo CV Online - ezCV</title>
+    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body class="ali-bg">
+    <!-- ##### Blog Area Start ##### -->
+    <section class="blog-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-5">
+                    <div class="cv-prev">
+                        <div class="blog_thumbnail">
+                            <img src="img/demos/demo-1.png" class="temp-img" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-7">
+                    <div class="cv-download">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 col-md-12">
+                                <p class="topnote">
+                                    Điền tất cả các trường bắt buộc và nhấp vào "Tạo CV" để lưu dữ liệu của bạn.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <!-- Form có ID rõ ràng -->
+                        <form method="post" id="cvDataForm">
+                            <div class="mt-150">
+                                <h2>Thông tin cá nhân</h2>
+                                <div class="block-container">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-2 col-md-4">
+                                            <img src="img/test-img/1.jpg" class="d-block" alt="">
+                                        </div>
+                                        <div class="col-lg-5 col-md-8 mt-s">
+                                            <h6>Tải ảnh của bạn</h6>
+                                            <p class="text-muted mb-0">Kích thước đề xuất: 300x300 (.jpg hoặc .png)</p>
+                                        </div>
+                                        <div class="col-lg-5 col-md-12 mt-s">
+                                            <label for="avatar">Tải ảnh lên</label>
+                                            <input type="file" id="avatar" name="avatar" accept="image/*"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-30">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <label>Tên đầy đủ:</label>
+                                                <input type="text" name="full-name" class="form-control"
+                                                    placeholder="Nhập tên đầy đủ của bạn">
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <label>Tiêu đề công việc:</label>
+                                                <input type="text" name="job-title" class="form-control"
+                                                    placeholder="Ex: Lập trình viên Web">
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <label>Địa chỉ:</label>
+                                                <input type="text" name="address" class="form-control"
+                                                    placeholder="Nhập địa chỉ của bạn">
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <label>Email:</label>
+                                                <input type="text" name="email" class="form-control"
+                                                    placeholder="Nhập email của bạn">
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <label>Số điện thoại:</label>
+                                                <input type="text" name="phone" class="form-control"
+                                                    placeholder="Nhập số điện thoại của bạn">
+                                            </div>
+
+                                            <div class="col-lg-12">
+                                                <label>Giới thiệu bản thân (Bio):</label>
+                                                <textarea name="comments" rows="4" class="form-control"
+                                                    placeholder="Viết ngắn gọn về bản thân..."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Học vấn -->
+                            <div class="form-group add-edu">
+                                <h2>Học vấn</h2>
+                                <div class="all-edus">
+                                    <div class="new-edu">
+                                        <label>Ngành học:</label>
+                                        <input type="text" class="form-control" placeholder="Ex: Kỹ thuật phần mềm">
+                                        <label>Bằng cấp:</label>
+                                        <input type="text" class="form-control" placeholder="Ex: Cử nhân">
+                                        <label>Trường học:</label>
+                                        <input type="text" class="form-control" placeholder="Ex: Đại học ABC">
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <label>Từ năm:</label>
+                                                <input type="month" class="form-control">
+                                            </div>
+                                            <div class="col">
+                                                <label>Đến năm:</label>
+                                                <input type="month" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Kinh nghiệm -->
+                            <div class="form-group add-exp mt-s">
+                                <h2>Kinh nghiệm</h2>
+                                <div class="all-exps">
+                                    <div class="new-exp">
+                                        <label>Chức vụ:</label>
+                                        <input type="text" class="form-control" placeholder="Ex: Lập trình viên Web">
+                                        <label>Công ty:</label>
+                                        <input type="text" class="form-control" placeholder="Ex: Công ty ABC">
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <label>Từ năm:</label>
+                                                <input type="month" class="form-control">
+                                            </div>
+                                            <div class="col">
+                                                <label>Đến năm:</label>
+                                                <input type="month" class="form-control">
+                                            </div>
+                                        </div>
+                                        <label>Mô tả:</label>
+                                        <textarea class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Kỹ năng -->
+                            <div class="form-group add-skill mt-s">
+                                <h2>Kỹ năng</h2>
+                                <div class="all-skills">
+                                    <div class="new-skills">
+                                        <label>Kỹ năng:</label>
+                                        <input type="text" class="form-control" placeholder="Ex: HTML, CSS, JS">
+                                        <label>Trình độ:</label>
+                                        <input type="text" class="form-control" placeholder="Ex: Tốt, Khá, Cơ bản">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sở thích -->
+                            <div class="form-group add-social mt-s">
+                                <h2>Sở thích</h2>
+                                <div class="all-hoppies">
+                                    <div class="new-hoppies">
+                                        <label>Sở thích:</label>
+                                        <input type="text" class="form-control" placeholder="Ex: Đọc sách, Du lịch">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="mt-100">
+                            <input type="submit" name="submit" value="Tạo CV" class="btn-sub">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Cấu hình Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBiG0G0uzpu4rKWyzVWWxM2y9iGGUn7e0",
+            authDomain: "ezcv-60898.firebaseapp.com",
+            projectId: "ezcv-60898",
+            storageBucket: "ezcv-60898.appspot.com",
+            messagingSenderId: "633226888127",
+            appId: "1:633226888127:web:bcf0b63f51df7f1d57d70a",
+            measurementId: "G-YJ62Z7GTSK"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Thu thập dữ liệu form
+        const form = document.getElementById('cvDataForm');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitButton = form.querySelector('.btn-sub');
+            const originalValue = submitButton.value;
+            submitButton.disabled = true;
+            submitButton.value = 'Đang lưu dữ liệu...';
+
+            // Thông tin cá nhân
+            const personalData = {
+                fullName: form.querySelector('input[name="full-name"]').value,
+                jobTitle: form.querySelector('input[name="job-title"]').value,
+                address: form.querySelector('input[name="address"]').value,
+                email: form.querySelector('input[name="email"]').value,
+                phone: form.querySelector('input[name="phone"]').value,
+                bio: form.querySelector('textarea[name="comments"]').value
+            };
+
+            // Hàm thu thập block lặp
+            const collectFields = (containerSelector, selectors) => {
+                const blocks = document.querySelectorAll(containerSelector);
+                const result = [];
+                blocks.forEach(block => {
+                    const inputs = block.querySelectorAll('input, textarea');
+                    const obj = {};
+                    selectors.forEach((key, i) => obj[key] = inputs[i]?.value || '');
+                    result.push(obj);
+                });
+                return result;
+            };
+
+            const education = collectFields('.new-edu', ['subject', 'degree', 'school', 'fromMonth', 'toMonth']);
+            const experience = collectFields('.new-exp', ['title', 'company', 'fromMonth', 'toMonth', 'description']);
+            const skills = collectFields('.new-skills', ['skillName', 'level']);
+            const hobbies = collectFields('.new-hoppies', ['hobbyName']);
+
+            const finalData = {
+                ...personalData,
+                education,
+                experience,
+                skills,
+                hobbies,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                await db.collection('userCVData').add(finalData);
+                alert('Gửi dữ liệu thành công!');
+                form.reset();
+            } catch (err) {
+                console.error("Lỗi Firestore:", err);
+                alert('Lưu thất bại, vui lòng thử lại.');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.value = originalValue;
+            }
+        });
+    </script>
+</body>
+
+</html>
