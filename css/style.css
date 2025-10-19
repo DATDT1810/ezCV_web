@@ -848,7 +848,7 @@ ol {
     background-size: cover;
 }
 .welcome_area.demo2{
-    background: #fff;
+    background: #91CBFF;
 }
 .welcome_area.demo3{
     background: url(../img/bg-img/demo3-bg.html) no-repeat top center;
@@ -4209,7 +4209,7 @@ body.light-version {
 }
 
 .light-version p {
-    color: #888;
+    color: #5b6672;
 }
 
 .light-version h1,
