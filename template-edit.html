@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Tạo CV Online - ezCV</title>
+    <title>ezCV - Tạo CV chuyên nghiệp trong tầm tay</title>
     <link rel="icon" href="img/core-img/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -81,6 +81,11 @@
                                                 <label>Email:</label>
                                                 <input type="email" name="email" class="form-control"
                                                     placeholder="Nhập email của bạn" required>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Ngày tháng năm sinh:</label>
+                                                <input type="date" name="birthday" class="form-control"
+                                                    placeholder="Nhập email của bạn">
                                             </div>
 
                                             <div class="col-lg-6">
@@ -348,12 +353,12 @@
         // -------------------------
         try {
             await db.collection('userCVData').add(finalData);
-            alert('Gửi dữ liệu thành công!');
+            alert(' Gửi dữ liệu thành công!');
             form.reset();
             avatarPreview.innerHTML = ''; // Xóa ảnh preview
             window.location.href = "index.html";
         } catch (err) {
-            console.error("Lỗi Firestore:", err);
+            console.error(" Lỗi Firestore:", err);
             alert('Lưu thất bại, vui lòng thử lại.');
         } finally {
             submitButton.disabled = false;
