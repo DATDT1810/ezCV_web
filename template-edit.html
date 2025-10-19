@@ -43,7 +43,7 @@
                             <div class="mt-150">
                                 <h2>Thông tin cá nhân</h2>
                                 <div class="block-container">
-                                    <div class="row align-items-center">
+                                    <!-- <div class="row align-items-center">
                                         <div class="col-lg-2 col-md-4">
                                             <img src="img/test-img/1.jpg" class="d-block" alt="" />
                                         </div>
@@ -55,9 +55,8 @@
                                         </div>
                                         <div class="col-lg-5 col-md-12 mt-s">
                                             <label for="avatar">Tải ảnh lên</label>
-
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="mt-30">
                                         <div class="row">
@@ -201,7 +200,7 @@
                             </div>
 
                             <hr class="mt-100" />
-                            <input type="button" name="submit" value="Tạo CV" class="btn-sub" />
+                            <input type="submit" name="submit" value="Tạo CV" class="btn-sub" />
                         </form>
                     </div>
                 </div>
@@ -245,28 +244,9 @@
 
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
-        const storage = firebase.storage();
 
         // ===============================
-        // Upload Avatar to Firebase Storage
-        // ===============================
-        async function uploadAvatar(fileInput) {
-            const file = fileInput?.files?.[0];
-            if (!file) return "";
-
-            try {
-                const storageRef = storage.ref(`avatars/${Date.now()}_${file.name}`);
-                await storageRef.put(file);
-                return await storageRef.getDownloadURL();
-            } catch (error) {
-                console.error(" Lỗi upload ảnh:", error);
-                alert("Không thể upload ảnh. Vui lòng thử lại!");
-                return "";
-            }
-        }
-
-        // ===============================
-        // Thu thập dữ liệu học vấn, kinh nghiệm, kỹ năng, sở thích
+        // Thu thập dữ liệu form CV
         // ===============================
         function collectCVData() {
             const form = document.getElementById("cvDataForm");
@@ -329,7 +309,7 @@
         }
 
         // ===============================
-        // Lưu dữ liệu vào Firestore
+        // Lưu dữ liệu lên Firestore
         // ===============================
         async function saveCVToFirestore(cvData) {
             try {
@@ -337,33 +317,24 @@
                     ...cvData,
                     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 });
-                alert(" CV của bạn đã được lưu thành công!");
+                alert("✅ CV của bạn đã được lưu thành công!");
             } catch (error) {
-                console.error(" Lỗi lưu Firestore:", error);
+                console.error("❌ Lỗi lưu Firestore:", error);
                 alert("Không thể lưu dữ liệu lên Firebase!");
             }
         }
 
         // ===============================
-        // Submit form
+        // Xử lý submit form
         // ===============================
         document.addEventListener("DOMContentLoaded", () => {
             const form = document.getElementById("cvDataForm");
-            const avatarInput = document.getElementById("avatar");
             const submitButton = document.querySelector(".btn-sub");
-
-            // Nếu form chưa có input file thì thêm
-            if (!avatarInput) {
-                const label = document.querySelector('label[for="avatar"]');
-                const input = document.createElement("input");
-                input.type = "file";
-                input.id = "avatar";
-                input.accept = "image/*";
-                label.parentNode.appendChild(input);
-            }
 
             form.addEventListener("submit", async (e) => {
                 e.preventDefault();
+
+                // Giữ kiểm tra required hoạt động
                 if (!form.checkValidity()) {
                     form.reportValidity();
                     return;
@@ -372,14 +343,7 @@
                 submitButton.disabled = true;
                 submitButton.value = "Đang lưu...";
 
-                //  Thu thập dữ liệu
                 const data = collectCVData();
-
-                //  Upload ảnh
-                const avatarUrl = await uploadAvatar(document.getElementById("avatar"));
-                if (avatarUrl) data.avatar = avatarUrl;
-
-                // Lưu Firestore
                 await saveCVToFirestore(data);
 
                 submitButton.disabled = false;
@@ -388,7 +352,6 @@
             });
         });
     </script>
-
 
 </body>
 
