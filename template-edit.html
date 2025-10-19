@@ -62,7 +62,7 @@
                                             <div class="col-lg-6">
                                                 <label>Tên đầy đủ:</label>
                                                 <input type="text" name="full-name" class="form-control"
-                                                    placeholder="Nhập tên đầy đủ của bạn">
+                                                    placeholder="Nhập tên đầy đủ của bạn" required>
                                             </div>
 
                                             <div class="col-lg-6">
@@ -74,13 +74,13 @@
                                             <div class="col-lg-6">
                                                 <label>Địa chỉ:</label>
                                                 <input type="text" name="address" class="form-control"
-                                                    placeholder="Nhập địa chỉ của bạn">
+                                                    placeholder="Nhập địa chỉ của bạn" required>
                                             </div>
 
                                             <div class="col-lg-6">
                                                 <label>Email:</label>
-                                                <input type="text" name="email" class="form-control"
-                                                    placeholder="Nhập email của bạn">
+                                                <input type="email" name="email" class="form-control"
+                                                    placeholder="Nhập email của bạn" required>
                                             </div>
                                             <div class="col-lg-6">
                                                 <label>Ngày tháng năm sinh:</label>
@@ -90,8 +90,8 @@
 
                                             <div class="col-lg-6">
                                                 <label>Số điện thoại:</label>
-                                                <input type="text" name="phone" class="form-control"
-                                                    placeholder="Nhập số điện thoại của bạn">
+                                                <input type="tel" name="phone" class="form-control"
+                                                    placeholder="VD: 0901234567" pattern="^(0|\+84)(\d{9})$" required>
                                             </div>
 
                                             <div class="col-lg-12">
@@ -104,76 +104,96 @@
                                 </div>
                             </div>
 
-                            <!-- Học vấn -->
-                            <div class="form-group add-edu">
+                            <!-- HỌC VẤN -->
+                            <div class="form-group add-social mt-s">
                                 <h2>Học vấn</h2>
-                                <div class="all-edus">
-                                    <div class="new-edu">
-                                        <label>Ngành học:</label>
-                                        <input type="text" class="form-control" placeholder="Ex: Kỹ thuật phần mềm">
-                                        <label>Bằng cấp:</label>
-                                        <input type="text" class="form-control" placeholder="Ex: Cử nhân">
-                                        <label>Trường học:</label>
-                                        <input type="text" class="form-control" placeholder="Ex: Đại học ABC">
-                                        <div class="form-row">
-                                            <div class="col">
-                                                <label>Từ năm:</label>
-                                                <input type="month" class="form-control">
-                                            </div>
-                                            <div class="col">
-                                                <label>Đến năm:</label>
-                                                <input type="month" class="form-control">
-                                            </div>
+                                <div class="block-container">
+                                    <div class="all-edus">
+                                        <div class="new-edu">
+                                            <label>Tên trường / Trung tâm:</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="Ví dụ: Đại học Kinh tế TP.HCM">
+                                            <label>Ngành học:</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="Ví dụ: Quản trị Kinh doanh">
+                                            <label>Thời gian học:</label>
+                                            <input type="text" class="form-control" placeholder="Ví dụ: 2019 - 2023">
                                         </div>
+                                    </div>
+
+                                    <!-- Nút thêm -->
+                                    <div class="add-blk add-edu btn btn-info mt-50" id="add-edu">
+                                        <i class="fa fa-plus"></i>
+                                        <span>Thêm học vấn khác</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Kinh nghiệm -->
-                            <div class="form-group add-exp mt-s">
-                                <h2>Kinh nghiệm</h2>
-                                <div class="all-exps">
-                                    <div class="new-exp">
-                                        <label>Chức vụ:</label>
-                                        <input type="text" class="form-control" placeholder="Ex: Lập trình viên Web">
-                                        <label>Công ty:</label>
-                                        <input type="text" class="form-control" placeholder="Ex: Công ty ABC">
-                                        <div class="form-row">
-                                            <div class="col">
-                                                <label>Từ năm:</label>
-                                                <input type="month" class="form-control">
-                                            </div>
-                                            <div class="col">
-                                                <label>Đến năm:</label>
-                                                <input type="month" class="form-control">
-                                            </div>
+                            <!-- KINH NGHIỆM LÀM VIỆC -->
+                            <div class="form-group add-social mt-s">
+                                <h2>Kinh nghiệm làm việc</h2>
+                                <div class="block-container">
+                                    <div class="all-exps">
+                                        <div class="new-exp">
+                                            <label>Tên công ty:</label>
+                                            <input type="text" class="form-control" required
+                                                placeholder="Ví dụ: Công ty TNHH ABC">
+                                            <label>Vị trí:</label>
+                                            <input type="text" class="form-control" required
+                                                placeholder="Ví dụ: Nhân viên kinh doanh">
+                                            <label>Thời gian làm việc:</label>
+                                            <input type="text" class="form-control" placeholder="Ví dụ: 2022 - 2024"
+                                                required>
                                         </div>
-                                        <label>Mô tả:</label>
-                                        <textarea class="form-control"></textarea>
+                                    </div>
+
+                                    <!-- Nút thêm -->
+                                    <div class="add-blk add-exp btn btn-info mt-50" id="add-exp">
+                                        <i class="fa fa-plus"></i>
+                                        <span>Thêm kinh nghiệm khác</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Kỹ năng -->
-                            <div class="form-group add-skill mt-s">
+                            <!-- KỸ NĂNG -->
+                            <div class="form-group add-social mt-s">
                                 <h2>Kỹ năng</h2>
-                                <div class="all-skills">
-                                    <div class="new-skills">
-                                        <label>Kỹ năng:</label>
-                                        <input type="text" class="form-control" placeholder="Ex: HTML, CSS, JS">
-                                        <label>Trình độ:</label>
-                                        <input type="text" class="form-control" placeholder="Ex: Tốt, Khá, Cơ bản">
+                                <div class="block-container">
+                                    <div class="all-skills">
+                                        <div class="new-skills">
+                                            <label>Kỹ năng:</label>
+                                            <input type="text" name="skills[]" class="form-control"
+                                                placeholder="VD: HTML, C#, Photoshop..." required>
+                                            <label>Trình độ:</label>
+                                            <input type="text" name="skills[]" class="form-control"
+                                                placeholder="VD: Cơ bản, Trung bình, Thành thạo..." required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Nút thêm -->
+                                    <div class="add-blk add-skills btn btn-info mt-50">
+                                        <i class="fa fa-plus"></i>
+                                        <span>Thêm kỹ năng khác</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Sở thích -->
+                            <!-- SỞ THÍCH -->
                             <div class="form-group add-social mt-s">
                                 <h2>Sở thích</h2>
-                                <div class="all-hoppies">
-                                    <div class="new-hoppies">
-                                        <label>Sở thích:</label>
-                                        <input type="text" class="form-control" placeholder="Ex: Đọc sách, Du lịch">
+                                <div class="block-container">
+                                    <div class="all-hoppies">
+                                        <div class="new-hoppies">
+                                            <label>Sở thích:</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="Ví dụ: Đọc sách, Du lịch">
+                                        </div>
+                                    </div>
+
+                                    <!-- Nút thêm -->
+                                    <div class="add-blk add-hoppies btn btn-info mt-50">
+                                        <i class="fa fa-plus"></i>
+                                        <span>Thêm sở thích khác</span>
                                     </div>
                                 </div>
                             </div>
@@ -187,88 +207,166 @@
         </div>
     </section>
 
+    <!-- ########## All JS ########## -->
+    <!-- jQuery js -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Parallax js -->
+    <script src="js/dzsparallaxer.js"></script>
+    <!-- Active js -->
+    <script src="js/form-script.js"></script>
+    <script src="js/script.js"></script>
+
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
     <script>
-        // Cấu hình Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyBiG0G0uzpu4rKWyzVWWxM2y9iGGUn7e0",
-            authDomain: "ezcv-60898.firebaseapp.com",
-            projectId: "ezcv-60898",
-            storageBucket: "ezcv-60898.appspot.com",
-            messagingSenderId: "633226888127",
-            appId: "1:633226888127:web:bcf0b63f51df7f1d57d70a",
-            measurementId: "G-YJ62Z7GTSK"
+    // =========================
+    // Cấu hình Firebase
+    // =========================
+    const firebaseConfig = {
+        apiKey: "AIzaSyBiG0G0uzpu4rKWyzVWWxM2y9iGGUn7e0",
+        authDomain: "ezcv-60898.firebaseapp.com",
+        projectId: "ezcv-60898",
+        storageBucket: "ezcv-60898.appspot.com",
+        messagingSenderId: "633226888127",
+        appId: "1:633226888127:web:bcf0b63f51df7f1d57d70a",
+        measurementId: "G-YJ62Z7GTSK"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+
+    // =========================
+    // Xem trước ảnh đại diện
+    // =========================
+    const avatarInput = document.getElementById('avatar');
+    const avatarPreview = document.getElementById('avatar-preview');
+
+    avatarInput?.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+            avatarPreview.innerHTML = `
+                <img src="${evt.target.result}" alt="Preview" 
+                    style="max-width:150px; border-radius:8px; margin-top:10px;">
+            `;
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // =========================
+    // Xử lý submit form
+    // =========================
+    const form = document.getElementById('cvDataForm');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const submitButton = form.querySelector('.btn-sub');
+        const originalValue = submitButton.value;
+        submitButton.disabled = true;
+        submitButton.value = 'Đang lưu dữ liệu...';
+
+        // -------------------------
+        // Lấy thông tin cá nhân
+        // -------------------------
+        const personalData = {
+            fullName: form.querySelector('input[name="full-name"]').value.trim(),
+            jobTitle: form.querySelector('input[name="job-title"]').value.trim(),
+            address: form.querySelector('input[name="address"]').value.trim(),
+            email: form.querySelector('input[name="email"]').value.trim(),
+            birthday: form.querySelector('input[name="birthday"]').value.trim(),
+            phone: form.querySelector('input[name="phone"]').value.trim(),
+            bio: form.querySelector('textarea[name="comments"]').value.trim()
         };
 
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        // Thu thập dữ liệu form
-        const form = document.getElementById('cvDataForm');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const submitButton = form.querySelector('.btn-sub');
-            const originalValue = submitButton.value;
-            submitButton.disabled = true;
-            submitButton.value = 'Đang lưu dữ liệu...';
-
-            // Thông tin cá nhân
-            const personalData = {
-                fullName: form.querySelector('input[name="full-name"]').value,
-                jobTitle: form.querySelector('input[name="job-title"]').value,
-                address: form.querySelector('input[name="address"]').value,
-                email: form.querySelector('input[name="email"]').value,
-                email: form.querySelector('input[name="birthday"]').value,
-                phone: form.querySelector('input[name="phone"]').value,
-                bio: form.querySelector('textarea[name="comments"]').value
-            };
-
-            // Hàm thu thập block lặp
-            const collectFields = (containerSelector, selectors) => {
-                const blocks = document.querySelectorAll(containerSelector);
-                const result = [];
-                blocks.forEach(block => {
-                    const inputs = block.querySelectorAll('input, textarea');
-                    const obj = {};
-                    selectors.forEach((key, i) => obj[key] = inputs[i]?.value || '');
-                    result.push(obj);
-                });
-                return result;
-            };
-
-            const education = collectFields('.new-edu', ['subject', 'degree', 'school', 'fromMonth', 'toMonth']);
-            const experience = collectFields('.new-exp', ['title', 'company', 'fromMonth', 'toMonth', 'description']);
-            const skills = collectFields('.new-skills', ['skillName', 'level']);
-            const hobbies = collectFields('.new-hoppies', ['hobbyName']);
-
-            const finalData = {
-                ...personalData,
-                education,
-                experience,
-                skills,
-                hobbies,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            };
-
+        // -------------------------
+        // Upload ảnh đại diện
+        // -------------------------
+        let avatarUrl = '';
+        const avatarFile = document.getElementById('avatar').files[0];
+        if (avatarFile) {
             try {
-                await db.collection('userCVData').add(finalData);
-                alert('Gửi dữ liệu thành công!');
-                form.reset();
-                window.location.href = "index.html";  
-            } catch (err) {
-                console.error("Lỗi Firestore:", err);
-                alert('Lưu thất bại, vui lòng thử lại.');
-            } finally {
+                const storageRef = storage.ref();
+                const avatarRef = storageRef.child('avatars/' + Date.now() + '_' + avatarFile.name);
+                const uploadTask = avatarRef.put(avatarFile);
+
+                await new Promise((resolve, reject) => {
+                    uploadTask.on('state_changed', null, reject, async () => {
+                        avatarUrl = await uploadTask.snapshot.ref.getDownloadURL();
+                        resolve();
+                    });
+                });
+            } catch (uploadErr) {
+                console.error("Lỗi upload ảnh:", uploadErr);
+                alert("Upload ảnh thất bại. Vui lòng thử lại.");
                 submitButton.disabled = false;
                 submitButton.value = originalValue;
+                return;
             }
-        });
-    </script>
+        }
+
+        // -------------------------
+        // Hàm thu thập block lặp
+        // -------------------------
+        const collectFields = (containerSelector, selectors) => {
+            const blocks = document.querySelectorAll(containerSelector);
+            const result = [];
+            blocks.forEach(block => {
+                const inputs = block.querySelectorAll('input, textarea');
+                const obj = {};
+                selectors.forEach((key, i) => obj[key] = inputs[i]?.value?.trim() || '');
+                result.push(obj);
+            });
+            return result;
+        };
+
+        const education = collectFields('.new-edu', ['school', 'subject', 'time']);
+        const experience = collectFields('.new-exp', ['title', 'company', 'fromMonth', 'toMonth', 'description']);
+        const skills = collectFields('.new-skills', ['skillName', 'level']);
+        const hobbies = collectFields('.new-hoppies', ['hobbyName']);
+
+        // -------------------------
+        // Gom toàn bộ dữ liệu
+        // -------------------------
+        const finalData = {
+            ...personalData,
+            avatarUrl,
+            education,
+            experience,
+            skills,
+            hobbies,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        // -------------------------
+        // Gửi dữ liệu lên Firestore
+        // -------------------------
+        try {
+            await db.collection('userCVData').add(finalData);
+            alert(' Gửi dữ liệu thành công!');
+            form.reset();
+            avatarPreview.innerHTML = ''; // Xóa ảnh preview
+            window.location.href = "index.html";
+        } catch (err) {
+            console.error(" Lỗi Firestore:", err);
+            alert('Lưu thất bại, vui lòng thử lại.');
+        } finally {
+            submitButton.disabled = false;
+            submitButton.value = originalValue;
+        }
+    });
+</script>
+
 </body>
 
 </html>
