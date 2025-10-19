@@ -38,7 +38,7 @@
 
                     <div class="container">
                         <!-- Form có ID rõ ràng -->
-                        <form method="post" id="cvDataForm">
+                        <form method="" id="cvDataForm">
                             <div class="mt-150">
                                 <h2>Thông tin cá nhân</h2>
                                 <div class="block-container">
@@ -356,7 +356,7 @@
             alert(' Gửi dữ liệu thành công!');
             form.reset();
             avatarPreview.innerHTML = ''; // Xóa ảnh preview
-            window.location.href = "https://ez-cv-web.vercel.app/";
+            window.location.href = "index.html";
         } catch (err) {
             console.error(" Lỗi Firestore:", err);
             alert('Lưu thất bại, vui lòng thử lại.');
