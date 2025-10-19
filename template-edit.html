@@ -38,7 +38,7 @@
 
                     <div class="container">
                         <!-- Form có ID rõ ràng -->
-                        <form method="post" action="javascript:void(0)" id="cvDataForm">
+                        <form id="cvDataForm">
                             <div class="mt-150">
                                 <h2>Thông tin cá nhân</h2>
                                 <div class="block-container">
@@ -199,7 +199,7 @@
                             </div>
 
                             <hr class="mt-100">
-                            <input type="submit" name="submit" value="Tạo CV" class="btn-sub">
+                            <input type="button" name="submit" value="Tạo CV" class="btn-sub">
                         </form>
                     </div>
                 </div>
@@ -225,147 +225,165 @@
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
 
     <script>
-    // =========================
-    // Cấu hình Firebase
-    // =========================
-    const firebaseConfig = {
-        apiKey: "AIzaSyBiG0G0uzpu4rKWyzVWWxM2y9iGGUn7e0",
-        authDomain: "ezcv-60898.firebaseapp.com",
-        projectId: "ezcv-60898",
-        storageBucket: "ezcv-60898.appspot.com",
-        messagingSenderId: "633226888127",
-        appId: "1:633226888127:web:bcf0b63f51df7f1d57d70a",
-        measurementId: "G-YJ62Z7GTSK"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    const storage = firebase.storage();
-
-    // =========================
-    // Xem trước ảnh đại diện
-    // =========================
-    const avatarInput = document.getElementById('avatar');
-    const avatarPreview = document.getElementById('avatar-preview');
-
-    avatarInput?.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (evt) => {
-            avatarPreview.innerHTML = `
-                <img src="${evt.target.result}" alt="Preview" 
-                    style="max-width:150px; border-radius:8px; margin-top:10px;">
-            `;
+        // =========================
+        // Cấu hình Firebase
+        // =========================
+        const firebaseConfig = {
+            apiKey: "AIzaSyBiG0G0uzpu4rKWyzVWWxM2y9iGGUn7e0",
+            authDomain: "ezcv-60898.firebaseapp.com",
+            projectId: "ezcv-60898",
+            storageBucket: "ezcv-60898.appspot.com",
+            messagingSenderId: "633226888127",
+            appId: "1:633226888127:web:bcf0b63f51df7f1d57d70a",
+            measurementId: "G-YJ62Z7GTSK"
         };
-        reader.readAsDataURL(file);
-    });
 
-    // =========================
-    // Xử lý submit form
-    // =========================
-    const form = document.getElementById('cvDataForm');
+        // Khởi tạo Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const storage = firebase.storage();
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
+        // Lấy các elements cần thiết
+        const form = document.getElementById('cvDataForm');
         const submitButton = form.querySelector('.btn-sub');
-        const originalValue = submitButton.value;
-        submitButton.disabled = true;
-        submitButton.value = 'Đang lưu dữ liệu...';
+        const avatarInput = document.getElementById('avatar');
+        const avatarPreview = document.getElementById('avatar-preview');
 
-        // -------------------------
-        // Lấy thông tin cá nhân
-        // -------------------------
-        const personalData = {
-            fullName: form.querySelector('input[name="full-name"]').value.trim(),
-            jobTitle: form.querySelector('input[name="job-title"]').value.trim(),
-            address: form.querySelector('input[name="address"]').value.trim(),
-            email: form.querySelector('input[name="email"]').value.trim(),
-            birthday: form.querySelector('input[name="birthday"]').value.trim(),
-            phone: form.querySelector('input[name="phone"]').value.trim(),
-            bio: form.querySelector('textarea[name="comments"]').value.trim()
-        };
+        // =========================
+        // Xem trước ảnh đại diện
+        // =========================
+        avatarInput?.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                if (avatarPreview) {
+                    avatarPreview.innerHTML = `
+                    <img src="${evt.target.result}" alt="Preview" 
+                        style="max-width:150px; border-radius:8px; margin-top:10px;">
+                 `;
+                }
+            };
+            reader.readAsDataURL(file);
+        });
 
-        // -------------------------
-        // Upload ảnh đại diện
-        // -------------------------
-        let avatarUrl = '';
-        const avatarFile = document.getElementById('avatar').files[0];
-        if (avatarFile) {
-            try {
-                const storageRef = storage.ref();
-                const avatarRef = storageRef.child('avatars/' + Date.now() + '_' + avatarFile.name);
-                const uploadTask = avatarRef.put(avatarFile);
+        // =========================
+        // Xử lý click nút Tạo CV (Sử dụng 'type="button"' để loại bỏ lỗi reload)
+        // =========================
+        submitButton.addEventListener('click', async () => {
 
-                await new Promise((resolve, reject) => {
-                    uploadTask.on('state_changed', null, reject, async () => {
-                        avatarUrl = await uploadTask.snapshot.ref.getDownloadURL();
-                        resolve();
+            // 1. KIỂM TRA TÍNH HỢP LỆ CỦA FORM (các trường required)
+            // Vì nút là type="button" nên ta phải gọi checkValidity() thủ công
+            if (!form.checkValidity()) {
+                form.reportValidity(); // Yêu cầu trình duyệt hiển thị lỗi validation
+                return; // Dừng nếu form không hợp lệ
+            }
+
+            const originalValue = submitButton.value;
+            submitButton.disabled = true;
+            submitButton.value = 'Đang lưu dữ liệu...';
+
+            // -------------------------
+            // Lấy thông tin cá nhân
+            // -------------------------
+            const personalData = {
+                fullName: form.querySelector('input[name="full-name"]').value.trim(),
+                jobTitle: form.querySelector('input[name="job-title"]').value.trim(),
+                address: form.querySelector('input[name="address"]').value.trim(),
+                email: form.querySelector('input[name="email"]').value.trim(),
+                birthday: form.querySelector('input[name="birthday"]').value.trim(),
+                phone: form.querySelector('input[name="phone"]').value.trim(),
+                bio: form.querySelector('textarea[name="comments"]').value.trim()
+            };
+
+            // -------------------------
+            // Upload ảnh đại diện
+            // -------------------------
+            let avatarUrl = '';
+            const avatarFile = avatarInput.files[0];
+
+            if (avatarFile) {
+                try {
+                    // Đổi cách sử dụng upload Task để tối ưu và dễ đọc hơn
+                    const avatarRef = storage.ref('avatars/' + Date.now() + '_' + avatarFile.name);
+                    await avatarRef.put(avatarFile);
+                    avatarUrl = await avatarRef.getDownloadURL();
+                } catch (uploadErr) {
+                    console.error("Lỗi upload ảnh:", uploadErr);
+                    alert("Upload ảnh thất bại. Vui lòng thử lại.");
+                    submitButton.disabled = false;
+                    submitButton.value = originalValue;
+                    return;
+                }
+            }
+
+            // -------------------------
+            // Hàm thu thập block lặp (chỉ lưu block KHÔNG RỖNG)
+            // -------------------------
+            const collectFields = (containerSelector, selectors) => {
+                const blocks = document.querySelectorAll(containerSelector);
+                const result = [];
+                blocks.forEach(block => {
+                    const inputs = block.querySelectorAll('input, textarea');
+                    const obj = {};
+
+                    // Thu thập giá trị theo thứ tự input trong block
+                    selectors.forEach((key, i) => {
+                        obj[key] = inputs[i]?.value?.trim() || '';
                     });
+
+                    // CHỈ THÊM BLOCK NẾU CÓ ÍT NHẤT 1 TRƯỜNG KHÔNG RỖNG
+                    if (Object.values(obj).some(val => val !== '')) {
+                        result.push(obj);
+                    }
                 });
-            } catch (uploadErr) {
-                console.error("Lỗi upload ảnh:", uploadErr);
-                alert("Upload ảnh thất bại. Vui lòng thử lại.");
+                return result;
+            };
+
+            const education = collectFields('.new-edu', ['school', 'subject', 'time']);
+            const experience = collectFields('.new-exp', ['company', 'title', 'time']);
+            const skills = collectFields('.new-skills', ['skillName', 'level']);
+            const hobbies = collectFields('.new-hoppies', ['hobbyName']);
+
+            // -------------------------
+            // Gom toàn bộ dữ liệu
+            // -------------------------
+            const finalData = {
+                ...personalData,
+                avatarUrl,
+                education,
+                experience,
+                skills,
+                hobbies,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            // -------------------------
+            // Gửi dữ liệu lên Firestore
+            // -------------------------
+            try {
+                await db.collection('userCVData').add(finalData);
+
+                // Xử lý hoàn tất thành công
+                setTimeout(() => {
+                    alert('Gửi dữ liệu thành công!');
+                    form.reset();
+                    if (avatarPreview) avatarPreview.innerHTML = '';
+                    window.location.href = "index.html";
+                }, 10);
+
+            } catch (err) {
+                console.error("Lỗi Firestore:", err);
+                alert('Lưu thất bại, vui lòng thử lại.');
+            } finally {
                 submitButton.disabled = false;
                 submitButton.value = originalValue;
-                return;
             }
-        }
-
-        // -------------------------
-        // Hàm thu thập block lặp
-        // -------------------------
-        const collectFields = (containerSelector, selectors) => {
-            const blocks = document.querySelectorAll(containerSelector);
-            const result = [];
-            blocks.forEach(block => {
-                const inputs = block.querySelectorAll('input, textarea');
-                const obj = {};
-                selectors.forEach((key, i) => obj[key] = inputs[i]?.value?.trim() || '');
-                result.push(obj);
-            });
-            return result;
-        };
-
-        const education = collectFields('.new-edu', ['school', 'subject', 'time']);
-        const experience = collectFields('.new-exp', ['title', 'company', 'fromMonth', 'toMonth', 'description']);
-        const skills = collectFields('.new-skills', ['skillName', 'level']);
-        const hobbies = collectFields('.new-hoppies', ['hobbyName']);
-
-        // -------------------------
-        // Gom toàn bộ dữ liệu
-        // -------------------------
-        const finalData = {
-            ...personalData,
-            avatarUrl,
-            education,
-            experience,
-            skills,
-            hobbies,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        };
-
-        // -------------------------
-        // Gửi dữ liệu lên Firestore
-        // -------------------------
-        try {
-            await db.collection('userCVData').add(finalData);
-            alert(' Gửi dữ liệu thành công!');
-            form.reset();
-            avatarPreview.innerHTML = ''; // Xóa ảnh preview
-            window.location.href = "index.html";
-        } catch (err) {
-            console.error(" Lỗi Firestore:", err);
-            alert('Lưu thất bại, vui lòng thử lại.');
-        } finally {
-            submitButton.disabled = false;
-            submitButton.value = originalValue;
-        }
-    });
-</script>
+        });
+    </script>
 
 </body>
 
